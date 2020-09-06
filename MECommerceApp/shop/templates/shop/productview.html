@@ -1,0 +1,66 @@
+{%extends 'shop/basic.html'%} {%block title %} Product Description {%endblock%}
+{%block body%} 
+<h1>{{value.id}}</h1>
+<h1>{{value.product_name}}</h1>
+<h1>{{value.category}}</h1>
+<h1>{{value.product_desc}}</h1>
+
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-4">
+    <img src="/media/{{prod.image}}" height="180px" width="200px"></img>
+    </div>
+
+    <div class="col-md-8">
+      <h1>{{prod.product_name}}</h1>
+      <p>{{prod.product_desc}}</p>
+      <p><strong style="color:red">Rs.{{prod.price}}</strong></p>
+        <button class="btn btn-primary">BuyNow</button>
+      <button id="{{prod.id}}" href="#" class="btn btn-primary cart">Add To Cart</button>
+    </div>
+  </div>
+
+  </div>
+
+    
+</div>
+
+
+<Script>
+console.log('working')
+{% comment %} if cart does not exists {% endcomment %}
+ if (localStorage.getItem('cart') == null)
+{
+
+  var cart={};
+}
+else
+{
+  cart=JSON.parse(localStorage.getItem('cart'));
+  document.getElementById("cartcount").innerHTML=Object.keys(cart).length; 
+
+} 
+$('.cart').click(function(){
+
+var idstr=this.id;
+
+{% comment %} if value is there in cart having that key entered by user, cart[idstr] gives the number value {% endcomment %}
+if (cart[idstr]!=undefined)
+{
+  cart[idstr]=cart[idstr]+1;
+}
+else 
+{
+cart[idstr]=1;
+}
+console.log(cart)
+
+localStorage.setItem('cart',JSON.stringify(cart));
+ document.getElementById("cartcount").innerHTML=Object.keys(cart).length; 
+});
+$('.popbotton').popover();
+document.getElementById("popbotton").setAttribute('data-content','<h3>welcome bro</h3>')
+</script>
+
+
+{%endblock%}

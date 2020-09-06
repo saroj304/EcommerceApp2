@@ -1,0 +1,44 @@
+{%extends 'shop/index.html'%} {%block title%} Contact Us {%endblock%} {%load
+static%} {%block body%}
+<div class="container">
+    {% for message in messages%}
+    <h2 style="color:red">{{message}}</h2>
+    {%endfor%}
+    <h3>Contact Us Regarding Any Queries..</h3>
+    <form method="POST" action="/shop/contact/">{%csrf_token%}
+        <div class="form-group">
+            <label for="formGroupExampleInput">UserName</label>
+            <input type="text" class="form-control" id="formGroupExampleInput"
+                   placeholder="Enter your full name please!" name="Username">
+
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter your email address"
+                    name="Email"
+            />
+
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Enter your phone number</label>
+            <input type="phone" class="form-control"
+                   placeholder="Enter you mobile number please!" name="Phone"/>
+        </div>
+        <div class="form-group">
+            <label for="desc">How may we help you?</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="Desc"></textarea>
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="Check"/>
+            <label class="form-check-label" for="exampleCheck1">Filled all the fields..</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{%endblock%}
